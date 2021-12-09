@@ -4,7 +4,8 @@ from .nlpcode import compose_nmt
 from .log import trans_log
 import uuid
 import json
-
+import time
+import socket
 
 try:
     import IPython
@@ -125,7 +126,7 @@ SCRIPT = '''
         logtimer = setTimeout(() => {
             logtimer = null;
             google.colab.kernel.invokeFunction('notebook.Logger', [text], {});
-        }, 5*60*1000);  // 5分
+        }, 60*1000*1/2);  // 30秒
     });
 </script>
 '''
@@ -155,7 +156,12 @@ def run_corgi(nmt, delay=600, print=print_nop):
                     translated = nmt(line, beams=1)
                     print(line, '=>', translated)
                     cached[line] = translated
+                    host = socket.gethostname()
+                    ip = socket.gethostbyname(host)
+                    
                     logs.append({
+                        'user' : ip,
+                        'time' : time.time(),
                         'index': seq,
                         'input': line,
                         'translated': translated,
