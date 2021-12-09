@@ -126,7 +126,7 @@ SCRIPT = '''
         logtimer = setTimeout(() => {
             logtimer = null;
             google.colab.kernel.invokeFunction('notebook.Logger', [text], {});
-        }, 60*1000*1/2);  // 30秒
+        }, 60*1000*5); 
     });
 </script>
 '''
