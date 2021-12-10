@@ -126,7 +126,7 @@ SCRIPT = '''
         logtimer = setTimeout(() => {
             logtimer = null;
             google.colab.kernel.invokeFunction('notebook.Logger', [text], {});
-        }, 60*1000*5); 
+        }, 60*1000*5); // 5分に１回まとめて送信
     });
 </script>
 '''
