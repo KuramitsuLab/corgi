@@ -59,15 +59,18 @@ class NMT(object):
         scores_list = [i[1] for i in pred_list]
         return sentences_list, scores_list
 
+NMT_Cache = None
 
 def generate_nmt(model_id='1qZmBK0wHO3OZblH8nabuWrrPXU6JInDc', model_file='./model.zip', max_length=64):
+    global NMT_Cache
     if not os.path.exists(MODEL_DIR):
         GoogleDriveDownloader.download_file_from_google_drive(
             file_id=model_id, dest_path=model_file, unzip=True)
-    nmt = NMT(MODEL_DIR)
+    if NMT_Cache is None:
+        NMT_Cache = NMT(MODEL_DIR)
 
     def nmt_t5(sentence, beams=5):
-        pred, prob = nmt.translate_beam(sentence, beams, max_length=max_length)
+        pred, prob = NMT_Cache.translate_beam(sentence, beams, max_length=max_length)
         return pred, prob
 
     return nmt_t5
