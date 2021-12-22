@@ -198,7 +198,7 @@ def run_corgi(nmt, delay=600, print=print_nop):
     HTML = SCRIPT.replace('600', str(delay))
     display(IPython.display.HTML(HTML))
 
-
-def start_corgi(model_id='1qZmBK0wHO3OZblH8nabuWrrPXU6JInDc', delay=600, print=print_nop):
+#def start_corgi(model_id='1qZmBK0wHO3OZblH8nabuWrrPXU6JInDc', delay=600, print=print_nop):
+def start_corgi(model_id='1EiY8Bo4J8SUoCw3VqB8CpZACnBQukBXn', delay=600, print=print_nop):
     nmt = compose_nmt(generate_nmt(model_id=model_id))
     run_corgi(nmt, delay=delay, print=print)
